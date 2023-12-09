@@ -6,6 +6,7 @@ import { actionsModal } from './modal';
 import { createCards } from './cards';
 import { initForms } from './forms';
 import { sliderOperation } from './slider';
+import { useCalculator } from './calculator';
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -15,4 +16,5 @@ window.addEventListener('DOMContentLoaded', () => {
 	createCards();
 	initForms;
 	sliderOperation();
+	useCalculator();
 });
