@@ -1,12 +1,12 @@
 'use script';
 
-import { actionsWithTabs } from './tabs';
-import { timerPage } from './timer';
-import { actionsModal } from './modal';
-import { createCards } from './cards';
-import { initForms } from './forms';
-import { sliderOperation } from './slider';
-import { useCalculator } from './calculator';
+import { actionsWithTabs } from './modules/tabs';
+import { timerPage } from './modules/timer';
+import { actionsModal } from './modules/modal';
+import { createCards } from './modules/cards';
+import { initForms } from './modules/forms';
+import { sliderOperation } from './modules/slider';
+import { useCalculator } from './modules/calculator';
 
 
 window.addEventListener('DOMContentLoaded', () => {
