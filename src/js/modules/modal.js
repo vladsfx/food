@@ -4,48 +4,51 @@
 
 'use strict';
 
-const modalsOpen = document.querySelectorAll('[data-modal]');
-const modalWindow = document.querySelector('.modal');
+export function openModal(modalSelector, modalTimerId) {
+	const modal = document.querySelector(modalSelector);
 
-let openModalTimeout;
-
-export function openModal() {
-	modalWindow.classList.add('show');
-	modalWindow.classList.remove('hide');
+	modal.classList.add('show');
+	modal.classList.remove('hide');
 	document.body.style.overflow = 'hidden';
-	clearInterval(openModalTimeout); // Очистка интервала открытия окна по времени
+
+	if (modalTimerId) {
+		clearInterval(modalTimerId); // Очистка интервала открытия окна по времени}
+	}
 }
 
-export function closeModal() {
-	modalWindow.classList.add('hide');
-	modalWindow.classList.remove('show');
+export function closeModal(modalSelector) {
+	const modal = document.querySelector(modalSelector);
+
+	modal.classList.add('hide');
+	modal.classList.remove('show');
 	document.body.style.overflow = '';
 }
 
-function actionsModal() {
-	modalsOpen.forEach((item) => {
-		item.addEventListener('click', openModal);
+function actionsModal(triggerSelector, modalSelector, modalTimerId) {
+	const modalTrigger = document.querySelectorAll(triggerSelector);
+	const modal = document.querySelector(modalSelector);
+
+	modalTrigger.forEach((item) => {
+		item.addEventListener('click', () => openModal(modalSelector, modalTimerId));
 	});
 
 	// Закрытие по щелчку на модальном окне и крестике
-	modalWindow.addEventListener('click', (e) => {
-		if (e.target === modalWindow || e.target.getAttribute('data-close') == '') {
-			closeModal();
+	modal.addEventListener('click', (e) => {
+		if (e.target === modal || e.target.getAttribute('data-close') == '') {
+			closeModal(modalSelector);
 		}
 	});
 	//Закрытие по нажатию кнопки "Escape"
 	document.addEventListener('keydown', (e) => {
-		if (e.code === 'Escape' && modalWindow.classList.contains('show')) {
-			closeModal();
+		if (e.code === 'Escape' && modal.classList.contains('show')) {
+			closeModal(modalSelector);
 		}
 	});
 
-	// Открытие модального окна по истечении времени
-	openModalTimeout = setTimeout(openModal, 50000);
 
 	function showModalByScroll() {
 		if (window.scrollY + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
-			openModal();
+			openModal(modalSelector, modalTimerId);
 			window.removeEventListener('scroll', showModalByScroll); // Удаление события открытия модалки конца страницы
 		}
 	}

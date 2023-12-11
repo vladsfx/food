@@ -4,9 +4,6 @@
 
 'use strict';
 
-const deadline = '2023-12-12';
-const timerClass = '.timer';
-
 function getTimeRemaining(endTime) {
 	let days, hours, minutes, seconds;
 	const t = Date.parse(endTime) - Date.parse(new Date());
@@ -75,4 +72,4 @@ function setTimer(selector, endTime) {
 	}
 }
 
-export const timerPage = setTimer(timerClass, deadline);
+export { setTimer };
